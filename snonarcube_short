@@ -1,0 +1,12 @@
+Sonarqube :-
+
+pull and run docker Image :-
+
+docker pull sonarqube:community
+docker run -d --rm --name sonar-api --restart unless-stopped -p 9000:9000 sonarqube:community
+
+Access Web :-
+user / pass --> admin
+
+vulnerable dir to scan :-
+git clone https://github.com/digininja/DVWA.git
