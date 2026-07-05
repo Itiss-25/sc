@@ -1,0 +1,51 @@
+#SNORT:
+
+sudo systemctl status snort
+
+sudo apt-get install snort -y
+cd /etc/snort
+
+sudo vim snort.conf 
+#comment: #ipvar HOME_NET any
+
+#add below:-
+ipvar HOME_NET 192.168.74.0/24
+
+#for Comment all rules of snort :-
+
+sudo sed -i 's/^include \$RULE_PATH/#include \$RULE_PATH/' /etc/snort/snort.conf 
+
+#except below:
+sudo include $RULE_PATH/local.rules
+
+sudo systemctl restart snort
+
+
+#Writing rules:
+
+cd etc/snort/rules/
+
+sudo vim local.rules 
+
+#for Comment all rules of snort :-
+ #write all rules as asked
+​
+
+#Live logs in console 
+
+sudo snort -A console -q -c ../snort.conf 
+
+#Test if snort working:
+
+sudo snort -T -i ens37 -c ../snort.conf
+
+alert icmp any any -> any any (msg:"sample ping detection";sid:1000001;rev:1)
+alert icmp any any -> $HOME_NET any (msg:"LARGE ICMP PACKET";dsize:>128;sid:1000001;)
+alert icmp any any -> $HOME_NET any (msg:"Flood Detected";detection_filter:track by_src,count 30,seconds 60;sid:1000002;)
+alert tcp any any -> $HOME_NET 80 (flags:S;msg:"TCP SYN Flood Detected";detection_filter:track by_src,count 20,seconds 60;sid:1000003;rev:1;)
+alert tcp any any -> $HOME_NET 22 (flow:to_server;msg:"SSH Brute Force Attempt";detection_filter:track by_src,count 5,seconds 60;sid:1000004;rev:1;)
+alert tcp any any -> 192.168.74.235 80 (msg:"keyword ADMIN";content:"admin"; sid :1000004;rev:1)
+alert tcp any any -> any any (msg:"kali detected";content:"kali";nocase;sid:1000005;)
+alert udp $HOME_NET any -> any 53 (msg:"Gmail Accessed";content:"gmail";nocase;sid:1000006;)
+alert udp $HOME_NET any -> any 53 (msg:"Facebook Accessed";content:"facebook";nocase;sid:1000007;)
+alert udp $HOME_NET any -> any 53 (msg:"Instagram Accessed";content:"instagram";nocase;sid:1000008;)
