@@ -1,0 +1,8 @@
+Zphisher 
+
+
+Git clone https://github.com/htr-tech/zphisher.git
+Cd zphisher
+Bash zphisher.sh
+
+Create a fake page and get cress
