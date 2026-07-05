@@ -1,0 +1,34 @@
+NAGIOS
+
+​ova file nagiosxi open in vm 
+
+Open http://<ip>
+User:nagiosadmin
+Password:redhat
+
+CLIENT:
+Configure wizard -> linux server with Napa -> install Ncpa remote server
+
+Nagiosclient :(ubuntu)
+
+apt-get install apt-transport-https
+sudo mkdir -m 0755 -p /etc/apt/keyrings/
+
+curl -fsSL https://repo.nagios.com/GPG-KEY-NAGIOS-V3 | sudo gpg --dearmor -o /etc/apt/keyrings/GPG-KEY-NAGIOS-V3.gpg
+
+echo "Types: deb
+URIs: https://repo.nagios.com/deb/$(lsb_release -cs)
+Suites: /
+Signed-By: /etc/apt/keyrings/GPG-KEY-NAGIOS-V3.gpg" | sudo tee /etc/apt/sources.list.d/nagios.sources > /dev/null
+
+sudo apt-get update
+
+Edit sudo vim /usr/local/ncpa/etc/ncpa.cfg
+
+	community_string = my token
+Systemctl restart ncpa ,check ip
+
+
+Browswer:
+Ip of client , port 5693, token:mytoken 
+Next -> gets dashboard -> finish dashboard view status -Dashboard linux server 
