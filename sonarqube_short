@@ -1,0 +1,20 @@
+Sonarqube :-
+
+pull and run docker Image :-
+docker container prune
+docker ps -a
+docker pull sonarqube:community
+docker run -d  --name sonar-api --restart unless-stopped -p 9000:9000 sonarqube:community
+#go to browser 127.0.0.1:9000
+Access Web :-
+user & pass --> admin
+
+#Local project -> give name -> is coustom -> creat project-> locally-> geenerqate -> copy -> continue -> 2 main pyhton 
+
+in Kali
+vulnerable dir to scan :-
+https://github.com/Commando-X/vuln-bank.git
+cd DVWA 
+apt install python3-pip -y
+
+and run command from sonar cube web portal given in python 
